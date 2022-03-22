@@ -44,11 +44,11 @@
 
 
             <EditText
-                android:id="@+id/editTextTextPersonName2"
+                android:id="@+id/logInUsernameInput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:autofillHints="" />
         </TableRow>
 
         <TableRow
@@ -60,7 +60,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Password" />
+                android:text="@string/password" />
         </TableRow>
 
         <TableRow
@@ -69,11 +69,11 @@
             android:gravity="center">
 
             <EditText
-                android:id="@+id/editTextTextPassword2"
+                android:id="@+id/LogInPasswordInput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:autofillHints="" />
         </TableRow>
 
         <TableRow
@@ -83,10 +83,13 @@
             android:gravity="center">
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/LogInButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sign In" />
+                android:background="#AE0D25"
+                android:text="@string/sign_in"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
@@ -100,7 +103,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="No account?" />
+                android:text="@string/no_account" />
         </TableRow>
 
         <TableRow
@@ -109,10 +112,13 @@
             android:gravity="center">
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/LogInPageSignUpButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sign Up" />
+                android:backgroundTint="#AE0D25"
+                android:text="Sign Up"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
         </TableRow>
 
     </TableLayout>
