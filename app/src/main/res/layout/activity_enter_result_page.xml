@@ -33,30 +33,35 @@
             android:layout_marginTop="15dp">
 
             <RadioGroup
+                android:id="@+id/testTypeRadioGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_gravity="center_horizontal">
+                android:layout_gravity="center_horizontal"
+                android:checkedButton="@id/tempRadio">
 
                 <RadioButton
-                    android:id="@+id/radioButton"
+                    android:id="@+id/tempRadio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="14dp"
                     android:text="Tempreture"
-                    android:layout_marginEnd="14dp"/>
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <RadioButton
-                    android:id="@+id/radioButton2"
+                    android:id="@+id/bloodRadio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="14dp"
                     android:text="Blood Pressure"
-                    android:layout_marginEnd="14dp"/>
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <RadioButton
-                    android:id="@+id/radioButton3"
+                    android:id="@+id/heartRadio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Heart Rate" />
+                    android:text="Heart Rate"
+                    tools:ignore="TouchTargetSizeCheck" />
             </RadioGroup>
         </TableRow>
 
@@ -67,11 +72,10 @@
             android:layout_marginTop="5dp">
 
             <EditText
-                android:id="@+id/editTextNumber2"
+                android:id="@+id/userResultInput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="number"
                 android:layout_margin="45dp"
                 />
         </TableRow>
@@ -81,7 +85,7 @@
             android:layout_height="match_parent" >
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/calcButton"
                 android:layout_width="269dp"
                 android:layout_height="wrap_content"
                 android:background="#AE0D25"
