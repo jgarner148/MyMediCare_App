@@ -15,10 +15,4 @@
         <item name="android:windowBackground">@color/white</item>
     </style>
 
-    <style name="greenBackground" parent="Theme.MyMediaCareApp">
-        <item name="android:windowBackground">@color/Green</item>
-    </style>
-
-
-
 </resources>

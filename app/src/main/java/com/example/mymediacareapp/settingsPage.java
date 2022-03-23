@@ -28,19 +28,22 @@ public class settingsPage extends AppCompatActivity implements AdapterView.OnIte
         backgroundSpinner.setOnItemSelectedListener(this);
     }
 
-    @SuppressLint("ResourceAsColor")
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String currentItem = backgroundSpinner.getSelectedItem().toString();
         Toast.makeText(settingsPage.this, currentItem, Toast.LENGTH_SHORT).show();
-        /**
-        if(currentItem.equals("White")){
-            settingsTable.setBackgroundColor(R.color.white);
+        if(currentItem.equals("White")) {
+            settingsTable.setBackgroundResource(R.color.white);
         }
-        else if(currentItem.equals("Green")){
-            settingsTable.setBackgroundColor(R.color.purple_500);
+        else if(currentItem.equals("Blue")) {
+            settingsTable.setBackgroundResource(R.color.blue);
         }
-         */
+        else if(currentItem.equals("Yellow")) {
+            settingsTable.setBackgroundResource(R.color.yellow);
+        }
+        else if(currentItem.equals("Green")) {
+            settingsTable.setBackgroundResource(R.color.green);
+        }
 
     }
 
