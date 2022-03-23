@@ -6,16 +6,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class viewResult extends AppCompatActivity {
+    TableLayout currentTable;
+    String background;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_result);
         Bundle extras = getIntent().getExtras();
+        if(extras!=null){
+            currentTable = (TableLayout)findViewById(R.id.viewResultTable);
+            background = extras.getString("background");
+            setBackground.table(background,currentTable);
+        }
+
         String result = extras.getString("userInput");
         String risk = extras.getString("riskLevel");
 
@@ -34,7 +43,9 @@ public class viewResult extends AppCompatActivity {
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(viewResult.this, homePage.class));
+                Intent i = new Intent(viewResult.this, homePage.class);
+                i.putExtra("background", background);
+                startActivity(i);
             }
         });
     }

@@ -6,19 +6,33 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TableLayout;
+import android.widget.Toast;
+
+import com.google.android.material.tabs.TabLayout;
 
 public class homePage extends AppCompatActivity {
-
+    TableLayout currentTable;
+    String background;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+        Bundle extras = getIntent().getExtras();
+        if(extras!=null){
+            currentTable = (TableLayout)findViewById(R.id.homepageTable);
+            background = extras.getString("background");
+            setBackground.table(background,currentTable);
+        }
+
 
         Button SettingsButton = (Button)findViewById(R.id.settingsButton);
         SettingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(homePage.this, settingsPage.class));
+                Intent i = new Intent(homePage.this, settingsPage.class);
+                i.putExtra("background", background);
+                startActivity(i);
             }
         });
 
@@ -26,7 +40,9 @@ public class homePage extends AppCompatActivity {
         resultButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(homePage.this, enterResultPage.class));
+                Intent i = new Intent(homePage.this, enterResultPage.class);
+                i.putExtra("background", background);
+                startActivity(i);
             }
         });
 
@@ -34,7 +50,9 @@ public class homePage extends AppCompatActivity {
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(homePage.this, LoginPage.class));
+                Intent i = new Intent(homePage.this, LoginPage.class);
+                i.putExtra("background", background);
+                startActivity(i);
             }
         });
     }

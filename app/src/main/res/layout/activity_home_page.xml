@@ -7,6 +7,7 @@
     tools:context=".homePage">
 
     <TableLayout
+        android:id="@+id/homepageTable"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"

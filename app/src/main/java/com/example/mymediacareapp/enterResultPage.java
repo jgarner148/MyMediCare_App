@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,14 +17,21 @@ import org.w3c.dom.Text;
 public class enterResultPage extends AppCompatActivity {
     private RadioGroup radioGroup;
     private String selectedOption = "Temp";
+    TableLayout currentTable;
+    String background;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_result_page);
+        Bundle extras = getIntent().getExtras();
+        if(extras!=null){
+            currentTable = (TableLayout)findViewById(R.id.enterResultTable);
+            background = extras.getString("background");
+            setBackground.table(background,currentTable);
+        }
 
         TextView bloodInputHelp = (TextView) findViewById(R.id.inputHelpText);
-
         EditText userResultInput = (EditText) findViewById(R.id.userResultInput);
 
         Button calcButton = (Button) findViewById(R.id.calcButton);
@@ -39,6 +47,7 @@ public class enterResultPage extends AppCompatActivity {
                     Intent i = new Intent(enterResultPage.this, viewResult.class);
                     i.putExtra("userInput", userResult);
                     i.putExtra("riskLevel", risk);
+                    i.putExtra("background", background);
                     startActivity(i);
                 }
                 else if(selectedOption.equals("Blood")){
@@ -46,6 +55,7 @@ public class enterResultPage extends AppCompatActivity {
                     Intent i = new Intent(enterResultPage.this, viewResult.class);
                     i.putExtra("userInput", userResult);
                     i.putExtra("riskLevel", risk);
+                    i.putExtra("background", background);
                     startActivity(i);
                 }
                 else if(selectedOption.equals("Heart")){
@@ -53,6 +63,7 @@ public class enterResultPage extends AppCompatActivity {
                     Intent i = new Intent(enterResultPage.this, viewResult.class);
                     i.putExtra("userInput", userResult);
                     i.putExtra("riskLevel", risk);
+                    i.putExtra("background", background);
                     startActivity(i);
                 }
             }

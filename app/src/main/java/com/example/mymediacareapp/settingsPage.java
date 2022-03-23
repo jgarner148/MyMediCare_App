@@ -3,6 +3,7 @@ package com.example.mymediacareapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,13 +15,21 @@ import android.widget.Toast;
 public class settingsPage extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Spinner backgroundSpinner;
     TableLayout settingsTable;
+    String currentItem;
+    String background;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_page);
+        Bundle extras = getIntent().getExtras();
+        settingsTable = (TableLayout)findViewById(R.id.settingsTable);
+        if(extras!=null){
+            background = extras.getString("background");
+            setBackground.table(background,settingsTable);
+        }
+
         backgroundSpinner = findViewById(R.id.backgroundList);
-        settingsTable = (TableLayout) findViewById(R.id.settingsTable);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.backgroundColours, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -30,8 +39,7 @@ public class settingsPage extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        String currentItem = backgroundSpinner.getSelectedItem().toString();
-        Toast.makeText(settingsPage.this, currentItem, Toast.LENGTH_SHORT).show();
+        currentItem= backgroundSpinner.getSelectedItem().toString();
         if(currentItem.equals("White")) {
             settingsTable.setBackgroundResource(R.color.white);
         }
@@ -44,6 +52,15 @@ public class settingsPage extends AppCompatActivity implements AdapterView.OnIte
         else if(currentItem.equals("Green")) {
             settingsTable.setBackgroundResource(R.color.green);
         }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        Intent i = new Intent(settingsPage.this, homePage.class);
+        i.putExtra("background", this.currentItem);
+        startActivity(i);
 
     }
 
