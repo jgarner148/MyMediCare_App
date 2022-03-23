@@ -12,5 +12,13 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/white</item>
     </style>
+
+    <style name="greenBackground" parent="Theme.MyMediaCareApp">
+        <item name="android:windowBackground">@color/Green</item>
+    </style>
+
+
+
 </resources>

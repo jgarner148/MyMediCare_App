@@ -28,4 +28,11 @@
     <string name="phone_number">Phone Number</string>
     <string name="sign_up">Sign UP</string>
     <string name="signupTerms">By pressing sign up you \n agree to the MyMediCare terms</string>
+    <string name="bloodInputHelp">Separate your two results with a "/"</string>
+    <string-array name="backgroundColours">
+        <item>White</item>
+        <item>Blue</item>
+        <item>Yellow</item>
+        <item>Green</item>
+    </string-array>
 </resources>

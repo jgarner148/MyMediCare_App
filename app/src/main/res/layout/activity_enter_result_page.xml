@@ -46,7 +46,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="14dp"
                     android:text="Tempreture"
-                    tools:ignore="TouchTargetSizeCheck" />
+                    tools:ignore="TouchTargetSizeCheck"
+                    android:buttonTint="#AE0D25"/>
 
                 <RadioButton
                     android:id="@+id/bloodRadio"
@@ -54,15 +55,32 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="14dp"
                     android:text="Blood Pressure"
-                    tools:ignore="TouchTargetSizeCheck" />
+                    tools:ignore="TouchTargetSizeCheck"
+                    android:buttonTint="#AE0D25"/>
 
                 <RadioButton
                     android:id="@+id/heartRadio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Heart Rate"
-                    tools:ignore="TouchTargetSizeCheck" />
+                    tools:ignore="TouchTargetSizeCheck"
+                    android:buttonTint="#AE0D25"/>
             </RadioGroup>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+
+            <TextView
+                android:id="@+id/inputHelpText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bloodInputHelp"
+                android:gravity="center"
+                android:visibility="gone"/>
         </TableRow>
 
         <TableRow

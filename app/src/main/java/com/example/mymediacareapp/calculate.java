@@ -18,7 +18,7 @@ public class calculate {
 
     public static String blood(String result){
         String riskLevel= "";
-        String[] parts = riskLevel.split("/");
+        String[] parts = result.split("/");
         int lowBlood = Integer.parseInt(parts[0]);
         int highBlodd = Integer.parseInt(parts[1]);
         if(lowBlood>110 || highBlodd>180){
