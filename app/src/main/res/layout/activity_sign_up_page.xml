@@ -173,7 +173,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="phone" />
         </TableRow>
 
         <TableRow
@@ -183,7 +183,7 @@
             android:layout_marginTop="25dp">
 
             <Button
-                android:id="@+id/singUpButton"
+                android:id="@+id/signUpButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#AE0D25"
