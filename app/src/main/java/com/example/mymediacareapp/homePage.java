@@ -13,7 +13,7 @@ import com.google.android.material.tabs.TabLayout;
 
 public class homePage extends AppCompatActivity {
     TableLayout currentTable;
-    String background;
+    String background = "white";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

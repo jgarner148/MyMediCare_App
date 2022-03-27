@@ -92,5 +92,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void updateString(String newString, String oldString, String col){
+        String query = "UPDATE " + tableName + " SET " + COL_NAME + " = '" + newString  + "' WHERE " + col + " = '" + oldString + "'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(query);
+    }
+
 
 }
