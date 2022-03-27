@@ -30,6 +30,7 @@
     <string name="signupTerms">By pressing sign up you \n agree to the MyMediCare terms</string>
     <string name="bloodInputHelp">Separate your two results with a "/"</string>
     <string name="editCap">EDIT</string>
+    <string name="save">Save</string>
     <string-array name="backgroundColours">
         <item>White</item>
         <item>Blue</item>

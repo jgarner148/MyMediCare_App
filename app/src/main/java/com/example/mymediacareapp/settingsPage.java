@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.Toast;
@@ -35,6 +36,17 @@ public class settingsPage extends AppCompatActivity implements AdapterView.OnIte
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         backgroundSpinner.setAdapter(adapter);
         backgroundSpinner.setOnItemSelectedListener(this);
+
+        Button editName = (Button) findViewById(R.id.editButtonName);
+        editName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(settingsPage.this, editPage.class);
+                i.putExtra("Type", "name");
+                startActivity(i);
+            }
+        });
+
     }
 
     @Override
