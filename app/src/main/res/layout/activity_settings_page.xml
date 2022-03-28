@@ -2,14 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     tools:context=".settingsPage">
 
     <TableLayout
         android:id="@+id/settingsTable"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
@@ -17,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp">
 
             <TextView
                 android:id="@+id/textView11"
@@ -36,10 +37,17 @@
             android:layout_marginTop="15dp">
 
 
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Background:" />
+
             <Spinner
                 android:id="@+id/backgroundList"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"/>
         </TableRow>
 
         <TableRow
@@ -52,7 +60,7 @@
                 android:id="@+id/fontText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fontText" />
+                android:text="FONT?" />
 
             <Button
                 android:id="@+id/editButtonFont"
@@ -60,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:background="#AE0D25"
-                android:text="@string/edit"
+                android:text="FONT?"
                 android:textColor="#FFFFFF" />
         </TableRow>
 
@@ -74,7 +82,7 @@
                 android:id="@+id/nameText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/nameString" />
+                android:text="@string/name" />
 
             <Button
                 android:id="@+id/editButtonName"
@@ -84,6 +92,27 @@
                 android:background="#AE0D25"
                 android:text="@string/edit"
                 android:textColor="#FFFFFF" />
+
+
+            <!--Tags for editing the name that will become visible later in the code -->
+            <EditText
+                android:id="@+id/editTextName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/saveButtonName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:background="#AE0D25"
+                android:text="@string/save"
+                android:textColor="#FFFFFF"
+                android:visibility="gone"/>
+            <!--End of extra tags -->
         </TableRow>
 
         <TableRow
@@ -106,6 +135,26 @@
                 android:background="#AE0D25"
                 android:text="@string/edit"
                 android:textColor="#FFFFFF" />
+
+            <!--Tags for editing the age that will become visible later in the code -->
+            <EditText
+                android:id="@+id/editTextAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/saveButtonAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:background="#AE0D25"
+                android:text="@string/save"
+                android:textColor="#FFFFFF"
+                android:visibility="gone"/>
+            <!--End of extra tags -->
         </TableRow>
 
         <TableRow
@@ -128,6 +177,26 @@
                 android:background="#AE0D25"
                 android:text="@string/edit"
                 android:textColor="#FFFFFF" />
+
+            <!--Tags for editing the age that will become visible later in the code -->
+            <EditText
+                android:id="@+id/editTextAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/saveButtonAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:background="#AE0D25"
+                android:text="@string/save"
+                android:textColor="#FFFFFF"
+                android:visibility="gone"/>
+            <!--End of extra tags -->
         </TableRow>
 
         <TableRow
@@ -150,7 +219,128 @@
                 android:background="#AE0D25"
                 android:text="@string/edit"
                 android:textColor="#FFFFFF" />
+
+            <!--Tags for editing the age that will become visible later in the code -->
+            <EditText
+                android:id="@+id/editTextPH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/saveButtonPH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:background="#AE0D25"
+                android:text="@string/save"
+                android:textColor="#FFFFFF"
+                android:visibility="gone"/>
+            <!--End of extra tags -->
         </TableRow>
+
+        <TableRow
+            android:id="@+id/changePasswordRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="15dp">
+
+            <Button
+                android:id="@+id/editPasswordButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#AE0D25"
+                android:text="@string/change_password"
+                android:textColor="#FFFFFF" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="15dp">
+
+            <Button
+                android:id="@+id/editContactButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#AE0D25"
+                android:text="@string/change_contact"
+                android:textColor="#FFFFFF" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/editPasswordOldRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layoutDirection="rtl">
+
+            <EditText
+                android:id="@+id/editPasswordOldInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/editPasswordOldText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/old_password"
+                android:visibility="gone"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/editPasswordNewRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layoutDirection="rtl">
+
+            <EditText
+                android:id="@+id/editPasswordNewInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/editPasswordNewText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/new_password"
+                android:visibility="gone"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/savePasswordRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layoutDirection="rtl">
+
+            <Button
+                android:id="@+id/savePasswordButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#AE0D25"
+                android:text="@string/save"
+                android:textColor="#FFFFFF"
+                android:visibility="gone"/>
+
+        </TableRow>
+
 
 
 

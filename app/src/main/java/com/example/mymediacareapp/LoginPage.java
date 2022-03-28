@@ -44,7 +44,12 @@ public class LoginPage extends AppCompatActivity {
                         //run check on password
                         boolean correctPassword = dataBaseHelper.checkPassword(inputtedUsername,inputtedPassword);
                         if(correctPassword){
-                            startActivity(new Intent(LoginPage.this, homePage.class));
+                            String[] result = dataBaseHelper.getFromUsername(inputtedUsername);
+                            String background = result[6];
+                            Intent i = new Intent(LoginPage.this, homePage.class);
+                            i.putExtra("username",inputtedUsername);
+                            i.putExtra("background",background);
+                            startActivity(i);
                         }
                         else{
                             Toast.makeText(LoginPage.this, "Invalid Password", Toast.LENGTH_SHORT).show();
@@ -57,6 +62,12 @@ public class LoginPage extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void onBackPressed() {
+        finishAffinity();
+        //Toast.makeText(LoginPage.this, "Press SIGN OUT to exit application", Toast.LENGTH_SHORT).show();
+        //super.onBackPressed();
     }
 
 

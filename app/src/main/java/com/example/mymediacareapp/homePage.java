@@ -13,7 +13,9 @@ import com.google.android.material.tabs.TabLayout;
 
 public class homePage extends AppCompatActivity {
     TableLayout currentTable;
-    String background = "white";
+    String background = "";
+    String username = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +25,7 @@ public class homePage extends AppCompatActivity {
             currentTable = (TableLayout)findViewById(R.id.homepageTable);
             background = extras.getString("background");
             setBackground.table(background,currentTable);
+            username = extras.getString("username");
         }
 
 
@@ -32,6 +35,7 @@ public class homePage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(homePage.this, settingsPage.class);
                 i.putExtra("background", background);
+                i.putExtra("username", username);
                 startActivity(i);
             }
         });
@@ -51,9 +55,14 @@ public class homePage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(homePage.this, LoginPage.class);
-                i.putExtra("background", background);
                 startActivity(i);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(homePage.this, "Press SIGN OUT to exit application", Toast.LENGTH_SHORT).show();
+        //super.onBackPressed();
     }
 }

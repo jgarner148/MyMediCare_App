@@ -15,10 +15,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String COL_NAME = "name";
     public static final String COL_USERNAME = "Username";
     public static final String COL_PASSWORD = "password";
-    public static final String COL_ID = "ID";
     public static final String COL_AGE = "age";
     public static final String COL_ADDRESS = "address";
     public static final String COL_PH_NUMBER = "phNumber";
+    public static final String COL_CONTACT = "contacDetails";
+    public static final String COL_CONTACT_METHOD = "contactMethod";
+    public static final String COL_COLOR = "color";
 
     public DataBaseHelper(@Nullable Context context) {
         super(context, "users.db", null, 1);
@@ -27,13 +29,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     @SuppressLint("SQLiteString")
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableStatement = "CREATE TABLE " + tableName + " (" + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                                                                        COL_USERNAME + " STRING, " +
+        String createTableStatement = "CREATE TABLE " + tableName + " (" + COL_USERNAME + " STRING PRIMARY KEY, " +
                                                                         COL_PASSWORD + " STRING, " +
                                                                         COL_NAME + " STRING, " +
-                                                                        COL_AGE + " INT, " +
+                                                                        COL_AGE + " STRING, " +
                                                                         COL_ADDRESS + " STRING, " +
-                                                                        COL_PH_NUMBER + " STRING)";
+                                                                        COL_PH_NUMBER + " STRING," +
+                                                                        COL_CONTACT + " STRING," +
+                                                                        COL_CONTACT_METHOD + " STRING," +
+                                                                        COL_COLOR + " STRING)";
         db.execSQL(createTableStatement);
     }
 
@@ -42,7 +46,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean addOne(String username, String password, String name, int age, String address, String phNumber){
+    public boolean addOne(String username, String password, String name, String age, String address, String phNumber, String contact, String method, String color){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -51,7 +55,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cv.put(COL_NAME, name);
         cv.put(COL_AGE, age);
         cv.put(COL_ADDRESS, address);
-        cv.put(COL_PH_NUMBER,phNumber);
+        cv.put(COL_PH_NUMBER, phNumber);
+        cv.put(COL_CONTACT, contact);
+        cv.put(COL_CONTACT_METHOD, method);
+        cv.put(COL_COLOR, color);
 
         long insert = db.insert(tableName, null, cv);
         db.close();
@@ -93,9 +100,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public void updateString(String newString, String oldString, String col){
-        String query = "UPDATE " + tableName + " SET " + COL_NAME + " = '" + newString  + "' WHERE " + col + " = '" + oldString + "'";
+        String query = "UPDATE " + tableName + " SET " + col + " = '" + newString  + "' WHERE " + col + " = '" + oldString + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(query);
+    }
+
+    public String[] getFromUsername(String username){
+        String query = "SELECT " + COL_NAME + ", " + COL_AGE + ", " + COL_ADDRESS + ", " + COL_PH_NUMBER + ", " + COL_CONTACT + ", " + COL_CONTACT_METHOD + ", " + COL_COLOR + " FROM " + tableName + " WHERE " + COL_USERNAME + " = '" + username + "'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        String[] result = new String[7];
+        if(cursor.moveToFirst() && cursor.getCount()>=1) {
+            for (int i = 0; i <= 6; i++) {
+                result[i] = cursor.getString(i);
+            }
+        }
+        return result;
     }
 
 

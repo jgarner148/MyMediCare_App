@@ -24,13 +24,22 @@
     <string name="numberString">Phone Number: [NUMBER]</string>
     <string name="name">Name</string>
     <string name="age">Age</string>
-    <string name="address">Address</string>
+    <string name="address">Street Address</string>
     <string name="phone_number">Phone Number</string>
     <string name="sign_up">Sign UP</string>
     <string name="signupTerms">By pressing sign up you \n agree to the MyMediCare terms</string>
     <string name="bloodInputHelp">Separate your two results with a "/"</string>
     <string name="editCap">EDIT</string>
     <string name="save">Save</string>
+    <string name="preferred_contact_method">Preferred contact method:</string>
+    <string name="select_contact">Select Contact</string>
+    <string name="sms">SMS</string>
+    <string name="email">Email</string>
+    <string name="changeContact">Change Contact</string>
+    <string name="change_password">Change Password</string>
+    <string name="change_contact">Change Contact</string>
+    <string name="new_password">New Password</string>
+    <string name="old_password">Old Password</string>
     <string-array name="backgroundColours">
         <item>White</item>
         <item>Blue</item>
