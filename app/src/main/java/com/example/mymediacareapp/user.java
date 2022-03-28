@@ -55,8 +55,7 @@ public class user {
         return this.phNumber;
     }
 
-    public void setPhNumber(String newPhNumber, Context context
-    ) {
+    public void setPhNumber(String newPhNumber, Context context) {
         DataBaseHelper db = new DataBaseHelper(context);
         db.updateString(newPhNumber,this.phNumber,"phNumber");
         this.phNumber = newPhNumber;
@@ -66,16 +65,20 @@ public class user {
         return this.contactDetails;
     }
 
-    public void setContactDetails(String contactDetails) {
-        this.contactDetails = contactDetails;
+    public void setContactDetails(String newContactDetails, Context context) {
+        DataBaseHelper db = new DataBaseHelper(context);
+        db.updateString(newContactDetails,this.contactDetails,"contacDetails");
+        this.contactDetails = newContactDetails;
     }
 
     public String getContactMethod() {
         return this.contactMethod;
     }
 
-    public void setContactMethod(String contactMethod) {
-        this.contactMethod = contactMethod;
+    public void setContactMethod(String newContactMethod, Context context) {
+        DataBaseHelper db = new DataBaseHelper(context);
+        db.updateString(newContactMethod,this.contactMethod,"contactMethod");
+        this.contactMethod = newContactMethod;
     }
 
     public String getColor() {

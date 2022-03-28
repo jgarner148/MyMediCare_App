@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -22,6 +23,9 @@ public class settingsPage extends AppCompatActivity implements AdapterView.OnIte
     String background;
     String username;
     user currentUser;
+    String contactDetails;
+    boolean selectedContact = false;
+    String contactPreference ="sms";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -250,6 +254,69 @@ public class settingsPage extends AppCompatActivity implements AdapterView.OnIte
                     Toast.makeText(settingsPage.this, "Inputs can't be blank", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+        //Setting up click actions for the CHANGE CONTACT rows
+        RadioGroup newContactMethodGroup = (RadioGroup) findViewById(R.id.newContactMethodGroup);
+        Button selectNewContactButton = (Button) findViewById(R.id.selectNewContactButton);
+        Button saveNewContactButton = (Button) findViewById(R.id.saveNewContactButton);
+        editContactButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editpasswordButton.setVisibility(View.GONE);
+                editContactButton.setVisibility(View.GONE);
+                selectNewContactButton.setVisibility(View.VISIBLE);
+                newContactMethodGroup.setVisibility(View.VISIBLE);
+                saveNewContactButton.setVisibility(View.VISIBLE);
+            }
+        });
+        selectNewContactButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /**
+                 * CODE FOR CONTACT TO BE PLACED HERE
+                 */
+                boolean success = true;//currently set to always to true until method is made
+                if(success){
+                    contactDetails = "07951681608"; //Placeholder information
+                    selectedContact = true;
+                    selectNewContactButton.setText("Change");
+                    selectNewContactButton.setBackgroundResource(R.color.grey);
+                }
+            }
+        });
+        newContactMethodGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch(i){
+                    case R.id.emailNewRadio:
+                        contactPreference = "email";
+                        break;
+                    case R.id.smsNewRadio:
+                        contactPreference = "sms";
+                        break;
+                }
+            }
+        });
+        saveNewContactButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(selectedContact){
+                    currentUser.setContactDetails(contactDetails,settingsPage.this);
+                    currentUser.setContactMethod(contactPreference, settingsPage.this);
+                    editpasswordButton.setVisibility(View.VISIBLE);
+                    editContactButton.setVisibility(View.VISIBLE);
+                    selectNewContactButton.setVisibility(View.GONE);
+                    newContactMethodGroup.setVisibility(View.GONE);
+                    saveNewContactButton.setVisibility(View.GONE);
+                    Toast.makeText(settingsPage.this, "Contact Updated", Toast.LENGTH_SHORT).show();
+                    selectNewContactButton.setText("New Contact");
+                    selectNewContactButton.setBackgroundResource(R.color.redred);
+                }
+                else{
+                    Toast.makeText(settingsPage.this, "Make sure a contact has been selected", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

@@ -46,6 +46,7 @@ public class homePage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(homePage.this, enterResultPage.class);
                 i.putExtra("background", background);
+                i.putExtra("username", username);
                 startActivity(i);
             }
         });

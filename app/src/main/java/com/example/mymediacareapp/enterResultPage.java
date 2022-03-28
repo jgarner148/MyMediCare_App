@@ -19,6 +19,7 @@ public class enterResultPage extends AppCompatActivity {
     private String selectedOption = "Temp";
     TableLayout currentTable;
     String background;
+    String username = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class enterResultPage extends AppCompatActivity {
             currentTable = (TableLayout)findViewById(R.id.enterResultTable);
             background = extras.getString("background");
             setBackground.table(background,currentTable);
+            username=extras.getString("username");
         }
 
         TextView bloodInputHelp = (TextView) findViewById(R.id.inputHelpText);
@@ -47,7 +49,9 @@ public class enterResultPage extends AppCompatActivity {
                     Intent i = new Intent(enterResultPage.this, viewResult.class);
                     i.putExtra("userInput", userResult);
                     i.putExtra("riskLevel", risk);
+                    i.putExtra("type","Temp");
                     i.putExtra("background", background);
+                    i.putExtra("username",username);
                     startActivity(i);
                 }
                 else if(selectedOption.equals("Blood")){
@@ -55,7 +59,9 @@ public class enterResultPage extends AppCompatActivity {
                     Intent i = new Intent(enterResultPage.this, viewResult.class);
                     i.putExtra("userInput", userResult);
                     i.putExtra("riskLevel", risk);
+                    i.putExtra("type","Blood");
                     i.putExtra("background", background);
+                    i.putExtra("username",username);
                     startActivity(i);
                 }
                 else if(selectedOption.equals("Heart")){
@@ -63,7 +69,9 @@ public class enterResultPage extends AppCompatActivity {
                     Intent i = new Intent(enterResultPage.this, viewResult.class);
                     i.putExtra("userInput", userResult);
                     i.putExtra("riskLevel", risk);
+                    i.putExtra("type","Heart");
                     i.putExtra("background", background);
+                    i.putExtra("username",username);
                     startActivity(i);
                 }
             }
@@ -90,4 +98,13 @@ public class enterResultPage extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(enterResultPage.this, homePage.class);
+        i.putExtra("background", background);
+        i.putExtra("username", username);
+        startActivity(i);
+    }
+
 }
