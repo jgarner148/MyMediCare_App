@@ -67,22 +67,17 @@ public class viewResult extends AppCompatActivity {
                         if(ContextCompat.checkSelfPermission(viewResult.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
                             //Checks to see if permission denied
                             if (ActivityCompat.shouldShowRequestPermissionRationale(viewResult.this, Manifest.permission.SEND_SMS)){
-                                Toast.makeText(viewResult.this, "Failed to send  SMS - Permission denied", Toast.LENGTH_SHORT).show();
-                            }
+                                Toast.makeText(viewResult.this, "Failed to send  SMS - Permission denied", Toast.LENGTH_SHORT).show(); }
                             else{
                                 //Requesting permission
-                                ActivityCompat.requestPermissions(viewResult.this, new String[]{Manifest.permission.SEND_SMS}, 0);
-                            }
+                                ActivityCompat.requestPermissions(viewResult.this, new String[]{Manifest.permission.SEND_SMS}, 0); }
                         }
                         try{
                             //"+44" + currentUser.getContactDetails()
                             SmsManager smsManager = SmsManager.getDefault();
                             smsManager.sendTextMessage("+447951681608", null, message, null, null);
-                            Toast.makeText(viewResult.this, "Message sent as SMS", Toast.LENGTH_SHORT).show();
-                        }
-                        catch(java.lang.SecurityException ignored){
-                        }
-
+                            Toast.makeText(viewResult.this, "Message sent as SMS", Toast.LENGTH_SHORT).show(); }
+                        catch(java.lang.SecurityException ignored){ }
                     }
                     else{
                         //Method for sending email here
