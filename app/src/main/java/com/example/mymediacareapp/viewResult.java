@@ -5,8 +5,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.View;
@@ -46,6 +48,7 @@ public class viewResult extends AppCompatActivity {
             Button contactButton = (Button) findViewById(R.id.contactButton);
             contactButton.setVisibility(View.VISIBLE);
             contactButton.setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("IntentReset")
                 @Override
                 public void onClick(View view) {
                     DataBaseHelper db = new DataBaseHelper(viewResult.this);
@@ -81,7 +84,13 @@ public class viewResult extends AppCompatActivity {
                     }
                     else{
                         //Method for sending email here
-                        Toast.makeText(viewResult.this, "Message sent as email", Toast.LENGTH_SHORT).show();
+                        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                        emailIntent.setData(Uri.parse("mailto:"));
+                        emailIntent.putExtra(Intent.EXTRA_EMAIL,new String[]{currentUser.getContactDetails()});
+                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "MyMediCare high risk notification");
+                        emailIntent.putExtra(Intent.EXTRA_TEXT, message);
+                        emailIntent.setType("message/rfc822");
+                        startActivity(Intent.createChooser(emailIntent,"Choose email app"));
                     }
                 }
             });

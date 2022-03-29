@@ -3,6 +3,8 @@ package com.example.mymediacareapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
@@ -16,6 +18,8 @@ public class signUpPage extends AppCompatActivity {
     String contactPreference = "email";
     String contactDetails = "";
     boolean selectedContact = false;
+    String phone;
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,18 +43,13 @@ public class signUpPage extends AppCompatActivity {
 
         Button contactButton = (Button)findViewById(R.id.selectContactButton);
         contactButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                /**
-                 * CODE FOR CONTACT TO BE PLACED HERE
-                 */
-                boolean success = true; //Currently set to always be true until method is made
-                if(success) {
-                    contactDetails = "01511234567"; //Placeholder information
-                    selectedContact = true;
-                    contactButton.setText(R.string.changeContact);
-                    contactButton.setBackgroundResource(R.color.grey);
-                }
+                Intent in = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
+                startActivityForResult(in, 1);
+                contactButton.setText(R.string.changeContact);
+                contactButton.setBackgroundResource(R.color.grey);
             }
         });
 
@@ -96,6 +95,13 @@ public class signUpPage extends AppCompatActivity {
                     anyEmpty=true;
                 }
 
+                if(contactPreference.equals("sms")){
+                    contactDetails = phone;
+                }
+                else{
+                    contactDetails = email;
+                }
+
                 DataBaseHelper dataBaseHelper = new DataBaseHelper(signUpPage.this);
                 boolean doesExist = dataBaseHelper.checkUsername(inputtedUsername);
                 if(anyEmpty){
@@ -114,6 +120,7 @@ public class signUpPage extends AppCompatActivity {
                     boolean success = dataBaseHelper.addOne(inputtedUsername, inputtedPassword, inputtedName, inputtedAge, inputtedAddress, inputtedPhonenum, contactDetails,contactPreference,"white");
                     if(success){
                         Toast.makeText(signUpPage.this, "Now Sign in", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(signUpPage.this, contactDetails, Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(signUpPage.this, LoginPage.class));
                     }
                     else{
@@ -124,7 +131,32 @@ public class signUpPage extends AppCompatActivity {
             }
         });
 
-
-
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case 1:
+                    contactPicked(data);
+                    break; } }
+        else {
+            Toast.makeText(this, "Failed To pick contact", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void contactPicked(Intent data) {
+        Cursor cursor;
+        try {
+            Uri uri = data.getData ();
+            cursor = getContentResolver ().query (uri, null, null,null,null);
+            cursor.moveToFirst ();
+            int phoneIndex = cursor.getColumnIndex (ContactsContract.CommonDataKinds.Phone.NUMBER);
+            int emailIndex = cursor.getColumnIndex (ContactsContract.CommonDataKinds.Email.ADDRESS);
+            phone = cursor.getString (phoneIndex);
+            email = cursor.getString (emailIndex);
+            selectedContact = true;
+        } catch (Exception e) {
+            e.printStackTrace ();
+        }
     }
 }
