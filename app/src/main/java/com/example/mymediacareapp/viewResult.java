@@ -78,7 +78,7 @@ public class viewResult extends AppCompatActivity {
                         try{
                             //"+44" + currentUser.getContactDetails()
                             SmsManager smsManager = SmsManager.getDefault();
-                            smsManager.sendTextMessage("+447951681608", null, message, null, null);
+                            smsManager.sendTextMessage(currentUser.getContactDetails(), null, message, null, null);
                             Toast.makeText(viewResult.this, "Message sent as SMS", Toast.LENGTH_SHORT).show(); }
                         catch(java.lang.SecurityException ignored){ }
                     }

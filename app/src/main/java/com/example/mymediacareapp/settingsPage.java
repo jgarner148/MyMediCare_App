@@ -279,19 +279,13 @@ public class settingsPage extends AppCompatActivity implements AdapterView.OnIte
         });
         selectNewContactButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent in = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
-                startActivityForResult(in, RESULT_PICK_CONTACT);
-            }
-            /**
-            @Override
             public void onClick(View view) {
-                Intent in = new Intent (Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
+                Intent in;
                 if(contactPreference.equals("sms")){
-                    pickContact=new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
+                    in=new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
                 }
                 else{
-                    pickContact=new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Email.CONTENT_URI);
+                    in=new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Email.CONTENT_URI);
                 }
                 startActivityForResult(in, 1);
                 if(selectedContact){
@@ -299,7 +293,6 @@ public class settingsPage extends AppCompatActivity implements AdapterView.OnIte
                     selectNewContactButton.setBackgroundResource(R.color.grey);
                 }
             }
-            */
         });
         newContactMethodGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -314,6 +307,10 @@ public class settingsPage extends AppCompatActivity implements AdapterView.OnIte
                 }
                 if(selectedContact){
                     Toast.makeText(settingsPage.this, "Please reselect your contact", Toast.LENGTH_SHORT).show();
+                    selectNewContactButton.setText("New Contact");
+                    selectNewContactButton.setBackgroundResource(R.color.redred);
+                    selectedContact=false;
+
                 }
             }
         });
@@ -323,9 +320,11 @@ public class settingsPage extends AppCompatActivity implements AdapterView.OnIte
                 if(selectedContact){
                     if(contactPreference.equals("sms")){
                         currentUser.setContactDetails(phone,settingsPage.this);
+                        contactDetails=phone;
                     }
                     else{
                         currentUser.setContactDetails(email,settingsPage.this);
+                        contactDetails=email;
                     }
                     currentUser.setContactMethod(contactPreference, settingsPage.this);
                     editpasswordButton.setVisibility(View.VISIBLE);
@@ -333,7 +332,7 @@ public class settingsPage extends AppCompatActivity implements AdapterView.OnIte
                     selectNewContactButton.setVisibility(View.GONE);
                     newContactMethodGroup.setVisibility(View.GONE);
                     saveNewContactButton.setVisibility(View.GONE);
-                    Toast.makeText(settingsPage.this, "Contact Updated" + contactDetails, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(settingsPage.this, "Contact Updated", Toast.LENGTH_SHORT).show();
                     selectNewContactButton.setText("New Contact");
                     selectNewContactButton.setBackgroundResource(R.color.redred);
                 }
@@ -392,22 +391,16 @@ public class settingsPage extends AppCompatActivity implements AdapterView.OnIte
             Uri uri = data.getData();
             cursor = getContentResolver().query(uri, null, null, null, null);
             cursor.moveToFirst();
-            int phoneIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
-
-            phoneNo = cursor.getString(phoneIndex);
-            phone = phoneNo;
-            /**
             if(contactPreference.equals("sms")){
-                int phoneIndex = cursor.getColumnIndex (ContactsContract.CommonDataKinds.Phone.NUMBER);
-                phone = cursor.getString (phoneIndex);
+              int phoneIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+              phone = cursor.getString(phoneIndex);
             }
             else{
                 int emailIndex = cursor.getColumnIndex (ContactsContract.CommonDataKinds.Email.ADDRESS);
                 email = cursor.getString (emailIndex);
-            }*/
-            //selectedContact = true;
+            }
+            selectedContact = true;
         } catch (Exception e) {
-            e.printStackTrace();
             Toast.makeText(this, "Failed To pick contact", Toast.LENGTH_SHORT).show();
         }
     }

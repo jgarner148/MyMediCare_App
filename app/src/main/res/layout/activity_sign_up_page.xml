@@ -72,6 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                app:passwordToggleEnabled="true"
                 android:inputType="textPassword" />
         </TableRow>
 
@@ -178,23 +179,6 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_marginTop="10dp">
-
-            <Button
-                android:id="@+id/selectContactButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#AE0D25"
-                android:text="@string/select_contact"
-                android:textColor="#FFFFFF"
-                android:layout_marginStart="45dp"
-                android:layout_marginEnd="45dp"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:gravity="center">
 
             <TextView
@@ -202,8 +186,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="@string/preferred_contact_method"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:text="@string/hcp_Contact_details" />
         </TableRow>
 
         <TableRow
@@ -223,16 +207,33 @@
                     android:id="@+id/emailRadio"
                     android:layout_width="78dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/email"
-                    android:buttonTint="#AE0D25"/>
+                    android:buttonTint="#AE0D25"
+                    android:text="@string/email" />
 
                 <RadioButton
                     android:id="@+id/smsRadio"
                     android:layout_width="71dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/sms"
-                    android:buttonTint="#AE0D25"/>
+                    android:buttonTint="#AE0D25"
+                    android:text="@string/sms" />
             </RadioGroup>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="10dp">
+
+            <Button
+                android:id="@+id/selectContactButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#AE0D25"
+                android:text="@string/select_contact"
+                android:textColor="#FFFFFF"
+                android:layout_marginStart="45dp"
+                android:layout_marginEnd="45dp"/>
         </TableRow>
 
         <TableRow

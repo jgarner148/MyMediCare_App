@@ -26,6 +26,8 @@ public class signUpPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_page);
 
+        Button contactButton = (Button)findViewById(R.id.selectContactButton);
+
         RadioGroup selectMethodGroup = findViewById(R.id.selectContactMethodGroup);
         selectMethodGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -38,20 +40,32 @@ public class signUpPage extends AppCompatActivity {
                         contactPreference = "sms";
                         break;
                 }
+                if(selectedContact){
+                    Toast.makeText(signUpPage.this, "Please reselect your contact", Toast.LENGTH_SHORT).show();
+                    contactButton.setText("Select Contact");
+                    contactButton.setBackgroundResource(R.color.redred);
+                    //selectedContact=false;
+
+                }
             }
         });
 
-        Button contactButton = (Button)findViewById(R.id.selectContactButton);
-        contactButton.setOnClickListener(new View.OnClickListener() {
 
+        contactButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                contactDetails = "07951681608";
-                selectedContact=true;
-                //Intent in = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
-                //startActivityForResult(in, 1);
-                contactButton.setText(R.string.changeContact);
-                contactButton.setBackgroundResource(R.color.grey);
+                Intent in;
+                if(contactPreference.equals("sms")){
+                    in=new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
+                }
+                else{
+                    in=new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Email.CONTENT_URI);
+                }
+                startActivityForResult(in, 1);
+                if(selectedContact){
+                    contactButton.setText("Change");
+                    contactButton.setBackgroundResource(R.color.grey);
+                }
             }
         });
 
@@ -147,18 +161,23 @@ public class signUpPage extends AppCompatActivity {
         }
     }
     private void contactPicked(Intent data) {
-        Cursor cursor;
+        Cursor cursor = null;
         try {
-            Uri uri = data.getData ();
-            cursor = getContentResolver ().query (uri, null, null,null,null);
-            cursor.moveToFirst ();
-            int phoneIndex = cursor.getColumnIndex (ContactsContract.CommonDataKinds.Phone.NUMBER);
-            int emailIndex = cursor.getColumnIndex (ContactsContract.CommonDataKinds.Email.ADDRESS);
-            phone = cursor.getString (phoneIndex);
-            email = cursor.getString (emailIndex);
+            String phoneNo = null;
+            Uri uri = data.getData();
+            cursor = getContentResolver().query(uri, null, null, null, null);
+            cursor.moveToFirst();
+            if(contactPreference.equals("sms")){
+                int phoneIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+                phone = cursor.getString(phoneIndex);
+            }
+            else{
+                int emailIndex = cursor.getColumnIndex (ContactsContract.CommonDataKinds.Email.ADDRESS);
+                email = cursor.getString (emailIndex);
+            }
             selectedContact = true;
         } catch (Exception e) {
-            e.printStackTrace ();
+            Toast.makeText(this, "Failed To pick contact", Toast.LENGTH_SHORT).show();
         }
     }
 }

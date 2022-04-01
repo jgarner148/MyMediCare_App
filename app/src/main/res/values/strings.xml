@@ -41,6 +41,7 @@
     <string name="new_password">New Password</string>
     <string name="old_password">Old Password</string>
     <string name="new_contact">New Contact</string>
+    <string name="hcp_Contact_details">Health Care provider Contact details</string>
     <string-array name="backgroundColours">
         <item>White</item>
         <item>Blue</item>
