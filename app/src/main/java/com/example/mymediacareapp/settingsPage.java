@@ -31,6 +31,7 @@ public class settingsPage extends AppCompatActivity implements AdapterView.OnIte
     String contactPreference ="sms";
     String phone;
     String email;
+    private static final int RESULT_PICK_CONTACT = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -278,12 +279,27 @@ public class settingsPage extends AppCompatActivity implements AdapterView.OnIte
         });
         selectNewContactButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 Intent in = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
-                startActivityForResult(in, 1);
-                selectNewContactButton.setText("Change");
-                selectNewContactButton.setBackgroundResource(R.color.grey);
+                startActivityForResult(in, RESULT_PICK_CONTACT);
+            }
+            /**
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent (Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
+                if(contactPreference.equals("sms")){
+                    pickContact=new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
                 }
+                else{
+                    pickContact=new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Email.CONTENT_URI);
+                }
+                startActivityForResult(in, 1);
+                if(selectedContact){
+                    selectNewContactButton.setText("Change");
+                    selectNewContactButton.setBackgroundResource(R.color.grey);
+                }
+            }
+            */
         });
         newContactMethodGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -295,6 +311,9 @@ public class settingsPage extends AppCompatActivity implements AdapterView.OnIte
                     case R.id.smsNewRadio:
                         contactPreference = "sms";
                         break;
+                }
+                if(selectedContact){
+                    Toast.makeText(settingsPage.this, "Please reselect your contact", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -356,30 +375,40 @@ public class settingsPage extends AppCompatActivity implements AdapterView.OnIte
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
-                case 1:
+                case RESULT_PICK_CONTACT:
                     contactPicked(data);
-                    break; } }
-        else {
+                    break;
+            }
+        } else {
             Toast.makeText(this, "Failed To pick contact", Toast.LENGTH_SHORT).show();
         }
     }
     private void contactPicked(Intent data) {
-        Cursor cursor;
+        Cursor cursor = null;
         try {
-            Uri uri = data.getData ();
-            cursor = getContentResolver ().query (uri, null, null,null,null);
-            //cursor.moveToFirst ();
-            //int phoneIndex = cursor.getColumnIndex (ContactsContract.CommonDataKinds.Phone.NUMBER);
-            cursor.moveToFirst ();
-            int emailIndex = cursor.getColumnIndex (ContactsContract.CommonDataKinds.Email.DATA);
-            //phone = cursor.getString (phoneIndex);
-            email = cursor.getString (emailIndex);
-            selectedContact = true;
+            String phoneNo = null;
+            Uri uri = data.getData();
+            cursor = getContentResolver().query(uri, null, null, null, null);
+            cursor.moveToFirst();
+            int phoneIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+
+            phoneNo = cursor.getString(phoneIndex);
+            phone = phoneNo;
+            /**
+            if(contactPreference.equals("sms")){
+                int phoneIndex = cursor.getColumnIndex (ContactsContract.CommonDataKinds.Phone.NUMBER);
+                phone = cursor.getString (phoneIndex);
+            }
+            else{
+                int emailIndex = cursor.getColumnIndex (ContactsContract.CommonDataKinds.Email.ADDRESS);
+                email = cursor.getString (emailIndex);
+            }*/
+            //selectedContact = true;
         } catch (Exception e) {
-            e.printStackTrace ();
+            e.printStackTrace();
+            Toast.makeText(this, "Failed To pick contact", Toast.LENGTH_SHORT).show();
         }
     }
 

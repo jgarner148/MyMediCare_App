@@ -295,14 +295,31 @@
                 android:layout_height="wrap_content"
                 android:text="@string/old_password"
                 android:visibility="gone"/>
-            <Button
-                android:id="@+id/selectNewContactButton"
+
+            <RadioGroup
+                android:id="@+id/newContactMethodGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#AE0D25"
-                android:text="@string/new_contact"
-                android:textColor="#FFFFFF"
-                android:visibility="gone"/>
+                android:checkedButton="@id/smsNewRadio"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <RadioButton
+                    android:id="@+id/emailNewRadio"
+                    android:layout_width="78dp"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="#AE0D25"
+                    android:text="@string/email" />
+
+                <RadioButton
+                    android:id="@+id/smsNewRadio"
+                    android:layout_width="71dp"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="#AE0D25"
+                    android:text="@string/sms" />
+            </RadioGroup>
+
         </TableRow>
 
         <TableRow
@@ -327,29 +344,14 @@
                 android:text="@string/new_password"
                 android:visibility="gone"/>
 
-            <RadioGroup
-                android:id="@+id/newContactMethodGroup"
+            <Button
+                android:id="@+id/selectNewContactButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checkedButton="@id/smsNewRadio"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <RadioButton
-                    android:id="@+id/emailNewRadio"
-                    android:layout_width="78dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/email"
-                    android:buttonTint="#AE0D25"/>
-
-                <RadioButton
-                    android:id="@+id/smsNewRadio"
-                    android:layout_width="71dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sms"
-                    android:buttonTint="#AE0D25"/>
-            </RadioGroup>
+                android:background="#AE0D25"
+                android:text="@string/new_contact"
+                android:textColor="#FFFFFF"
+                android:visibility="gone" />
 
         </TableRow>
 

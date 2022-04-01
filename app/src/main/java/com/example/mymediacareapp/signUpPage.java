@@ -46,8 +46,10 @@ public class signUpPage extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Intent in = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
-                startActivityForResult(in, 1);
+                contactDetails = "07951681608";
+                selectedContact=true;
+                //Intent in = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
+                //startActivityForResult(in, 1);
                 contactButton.setText(R.string.changeContact);
                 contactButton.setBackgroundResource(R.color.grey);
             }
