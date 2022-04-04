@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyMediaCare App</string>
+    <string name="app_name">MyMediCare</string>
     <string name="username">Username</string>
     <string name="sign_out">Sign Out</string>
     <string name="settings">Settings</string>
