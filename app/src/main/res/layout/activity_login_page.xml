@@ -116,7 +116,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#AE0D25"
-                android:text="Sign Up"
+                android:text="@string/signup"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp" />
         </TableRow>

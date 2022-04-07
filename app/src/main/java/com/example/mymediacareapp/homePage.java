@@ -28,7 +28,7 @@ public class homePage extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         //If statement checking if there is information passed through from the previous activity
         if(extras!=null){
-            currentTable = (TableLayout)findViewById(R.id.enterResultTable);
+            currentTable = (TableLayout)findViewById(R.id.homepageTable);
             background = extras.getString("background"); //Setting the table background from the previous activity
             setBackground.table(background,currentTable);
             username=extras.getString("username"); //Setting the current username from the previous activity

@@ -18,22 +18,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class viewResult extends AppCompatActivity {
+    //Declaring variables
     TableLayout currentTable;
     String background;
     String username;
 
+    /**
+     * This method is called when the activity is created
+     * @param savedInstanceState the saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_result);
         Bundle extras = getIntent().getExtras();
-        if(extras!=null){
+        if(extras!=null){ //Getting the background and username from the previous activity
             currentTable = (TableLayout)findViewById(R.id.viewResultTable);
             background = extras.getString("background");
             setBackground.table(background,currentTable);
             username = extras.getString("username");
         }
 
+        //Getting the test information from the previous activity
         String result = extras.getString("userInput");
         String risk = extras.getString("riskLevel");
         String type = extras.getString("type");
@@ -44,10 +50,14 @@ public class viewResult extends AppCompatActivity {
         TextView riskText = (TextView) findViewById(R.id.riskText);
         riskText.setText(risk);
 
-        if(risk.equals("High Risk")){
+        if(risk.equals("High Risk")){ //Method for showing extra UI if the risk level is high
             Button contactButton = (Button) findViewById(R.id.contactButton);
             contactButton.setVisibility(View.VISIBLE);
             contactButton.setOnClickListener(new View.OnClickListener() {
+                /**
+                 * This method is called when the contact button is clicked
+                 * @param view the view
+                 */
                 @SuppressLint("IntentReset")
                 @Override
                 public void onClick(View view) {
@@ -65,7 +75,7 @@ public class viewResult extends AppCompatActivity {
                         message = message + "heart rate of " + result + " BPM in the MyMediCare app.";
                     }
                     if(contactMethod.equals("sms")){
-                        //Method for sending SMS message here
+                        //Method for sending SMS message
                         //Checks to see if permission is granted
                         if(ContextCompat.checkSelfPermission(viewResult.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
                             //Checks to see if permission denied
@@ -76,14 +86,13 @@ public class viewResult extends AppCompatActivity {
                                 ActivityCompat.requestPermissions(viewResult.this, new String[]{Manifest.permission.SEND_SMS}, 0); }
                         }
                         try{
-                            //"+44" + currentUser.getContactDetails()
                             SmsManager smsManager = SmsManager.getDefault();
                             smsManager.sendTextMessage(currentUser.getContactDetails(), null, message, null, null);
                             Toast.makeText(viewResult.this, "Message sent as SMS", Toast.LENGTH_SHORT).show(); }
                         catch(java.lang.SecurityException ignored){ }
                     }
                     else{
-                        //Method for sending email here
+                        //Method for sending email
                         Intent emailIntent = new Intent(Intent.ACTION_SEND);
                         emailIntent.setData(Uri.parse("mailto:"));
                         emailIntent.putExtra(Intent.EXTRA_EMAIL,new String[]{currentUser.getContactDetails()});
@@ -99,6 +108,10 @@ public class viewResult extends AppCompatActivity {
 
         Button exit = (Button) findViewById(R.id.exitButton);
         exit.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This method is called when the exit button is clicked
+             * @param view the view
+             */
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(viewResult.this, homePage.class);
@@ -108,6 +121,10 @@ public class viewResult extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * This method is called when the back button is pressed
+     */
     @Override
     public void onBackPressed() {
         Intent i = new Intent(viewResult.this, homePage.class);

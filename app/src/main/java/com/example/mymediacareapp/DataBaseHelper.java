@@ -146,8 +146,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
      * @param oldString Teh old string value
      * @param col The column being updated
      */
-    public void updateString(String newString, String oldString, String col){
-        String query = "UPDATE " + tableName + " SET " + col + " = '" + newString  + "' WHERE " + col + " = '" + oldString + "'";  //Query for updating the value
+    public void updateString(String newString, String oldString, String col, String currentUsername){
+        String query = "UPDATE " + tableName + " SET " + col + " = '" + newString  + "' WHERE " + col + " = '" + oldString + "' AND " + COL_USERNAME + " = '" + currentUsername + "'";  //Query for updating the value
         SQLiteDatabase db = this.getWritableDatabase(); //Getting the database
         db.execSQL(query); //Running the query
     }
